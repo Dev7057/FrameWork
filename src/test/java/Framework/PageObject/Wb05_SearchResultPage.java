@@ -1,16 +1,21 @@
 package Framework.PageObject;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class SearchResultPage {
+import java.time.Duration;
+import java.util.NoSuchElementException;
+
+public class Wb05_SearchResultPage {
 
     WebDriver ldriver;
 
-    public SearchResultPage(WebDriver rdriver) {
+    public Wb05_SearchResultPage(WebDriver rdriver) {
         ldriver = rdriver;
 
         PageFactory.initElements(rdriver, this);
@@ -20,9 +25,12 @@ public class SearchResultPage {
     @FindBy(xpath = "//div[@class='features_items']")
     WebElement SearchResult;
 
+    @FindBy(xpath = "//a[text()='Add to cart']")
+    WebElement hoveronAdtcart;
+
     // View Product Element
-    @FindBy(xpath = "//ul[@class='nav nav-pills nav-justified']//a[@href='/product_details/33']")  //a[text()='View Product']
-    WebElement ViewProductBtn;
+    @FindBy(xpath = "//a[text()='View Product' and contains(@href,'/product_details/33')]")   // //ul[@class='nav nav-pills nav-justified']//a[@href='/product_details/33']
+            WebElement ViewProductBtn;
 
 //    // Change Quantity Element
 //    @FindBy(id = "quantity")
@@ -45,8 +53,23 @@ public class SearchResultPage {
         return (SearchResult.getText());
     }
 
+    public void hoverOnAddToCart() {
+        ((JavascriptExecutor) ldriver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", hoveronAdtcart);
+        Actions act = new Actions(ldriver);
+        act.moveToElement(hoveronAdtcart).pause(Duration.ofSeconds(1)).perform();
+    }
+
     public void ClickOnViewProduct() {
-        ViewProductBtn.click();
+        try {
+            if (ViewProductBtn.isEnabled()) {
+                ViewProductBtn.click();
+                System.out.println("View button is clickable");
+            } else {
+                System.out.println("Not clicking on view button");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 

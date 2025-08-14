@@ -1,15 +1,15 @@
-package Framework.TestCases;
+package Framework.PageObject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CartPage {
+public class Wb07_CartPage {
 
     WebDriver ldriver;
 
-    public CartPage(WebDriver rdriver) {
+    public Wb07_CartPage(WebDriver rdriver) {
         ldriver = rdriver;
 
         PageFactory.initElements(rdriver, this);
@@ -27,7 +27,7 @@ public class CartPage {
     @FindBy(xpath = "//a[text()='Place Order' and @class='btn btn-default check_out']")
     WebElement placeOrderbtn;
 
-    // Card Details Elements
+    // Card Details Element
     // Name of card
     @FindBy(name = "name_on_card")
     WebElement Cname;

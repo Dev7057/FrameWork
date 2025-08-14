@@ -5,13 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MyAccount {
+public class Wb02_Signup_LoginPage {
 
-    // Create object of Webdriver
+    // Create an object of Webdriver
     WebDriver ldriver;
 
     // Constructor
-    public MyAccount(WebDriver rdriver) {
+    public Wb02_Signup_LoginPage(WebDriver rdriver) {
 
         ldriver = rdriver;
 

@@ -1,11 +1,11 @@
 package Framework.TestCases;
 
-import Framework.PageObject.AccountCreationDetails;
-import Framework.PageObject.IndexPage;
-import Framework.PageObject.MyAccount;
-import Framework.PageObject.RegisterUserAccount_HomePage;
+import Framework.PageObject.Wb04_RegisterUserAccount_HomePage;
+import Framework.PageObject.Wb01_HomePage;
+import Framework.PageObject.Wb02_Signup_LoginPage;
+import Framework.PageObject.Wb03_AccountCreationPage;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 
@@ -14,16 +14,17 @@ public class TC_MyAccountPageTest extends BaseClass {
     @Test(enabled = false)
     public void VerifyRegAndLogin() throws InterruptedException {
 
-        IndexPage pg = new IndexPage(driver);
+        Wb01_HomePage pg = new Wb01_HomePage(driver);
         pg.ClickOnSignup();
+        log.info("Clicked on the signup option");
 
-        MyAccount My = new MyAccount(driver);
+        Wb02_Signup_LoginPage My = new Wb02_Signup_LoginPage(driver);
         My.EnterName("Viru");
         My.EnterEmailID("viru34@yopmail.com");
         My.SignupButton();
-        logger.info("Signup successfully");
+        log.info("Signup successfully");
 
-        AccountCreationDetails ACCD = new AccountCreationDetails(driver);
+        Wb03_AccountCreationPage ACCD = new Wb03_AccountCreationPage(driver);
         ACCD.SelectTitleMr();
         ACCD.EnterPassword("123456");
         ACCD.EnterAddFName("Viru");
@@ -35,31 +36,30 @@ public class TC_MyAccountPageTest extends BaseClass {
         ACCD.EnterZipCode("1234");
         ACCD.EnterMobileNumber("9876432123");
         ACCD.ClickOnRegistration();
-
-        logger.info("Registration successfully");
+        log.info("Registration successfully");
 
     }
 
-    @Test(enabled = false)
+    @Test()
     public void VerifyLogin() throws IOException {
 
-        IndexPage pg = new IndexPage(driver);
+        Wb01_HomePage pg = new Wb01_HomePage(driver);
         pg.ClickOnSignup();
 
-        MyAccount My = new MyAccount(driver);
+        Wb02_Signup_LoginPage My = new Wb02_Signup_LoginPage(driver);
         My.EnterLoginEmail("viru34@yopmail.com");
         My.EnterLoginPassword("123456");
         My.ClickOnLoginButton();
-        logger.info("Log in successfully");
+        log.info("Log in successfully");
 
-        RegisterUserAccount_HomePage rgUser = new RegisterUserAccount_HomePage(driver);
+        Wb04_RegisterUserAccount_HomePage rgUser = new Wb04_RegisterUserAccount_HomePage(driver);
         String LoginUser = rgUser.verifyname();
 
-        if (LoginUser.equals("Viru")) {
-            logger.info("User name is correct");
+        if (LoginUser.equals("Viru1")) {
+            log.info("User name is correct");
             Assert.assertTrue(true);
         } else {
-            logger.info("User name is Incorrect");
+            log.info("User name is Incorrect");
             CaptureScreenShot(driver, "VerifyLogin");
             Assert.assertTrue(false);
         }

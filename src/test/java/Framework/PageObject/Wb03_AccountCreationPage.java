@@ -6,13 +6,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class AccountCreationDetails {
+public class Wb03_AccountCreationPage {
 
-    // Create object of Webdriver
+    // Create an object of Webdriver
     WebDriver ldriver;
 
     // Constructor
-    public AccountCreationDetails(WebDriver rdriver) {
+    public Wb03_AccountCreationPage(WebDriver rdriver) {
 
         ldriver = rdriver;
 
@@ -59,7 +59,7 @@ public class AccountCreationDetails {
     @FindBy(id = "mobile_number")
     WebElement MobileNum;
 
-    // Click on Create Account Button
+    // Click on the Create Account Button
     @FindBy(xpath = "//button[text()='Create Account']")
     WebElement CreateAccountbtn;
 

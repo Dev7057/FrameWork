@@ -1,9 +1,9 @@
 package Framework.TestCases;
 
-import Framework.PageObject.AccountCreationDetails;
-import Framework.PageObject.IndexPage;
-import Framework.PageObject.MyAccount;
-import Framework.PageObject.RegisterUserAccount_HomePage;
+import Framework.PageObject.Wb04_RegisterUserAccount_HomePage;
+import Framework.PageObject.Wb01_HomePage;
+import Framework.PageObject.Wb02_Signup_LoginPage;
+import Framework.PageObject.Wb03_AccountCreationPage;
 import Framework.Utilitize.ReadExcelFile;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.testng.Assert;
@@ -12,21 +12,21 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class TC_MyAccountPageTestDataDrivenTesting extends BaseClass {
+public class TC_Web02SigLPgTestDataDrivenTesting extends BaseClass {
 
     @Test(enabled = false)
     public void VerifyRegAndLogin() throws InterruptedException {
 
-        IndexPage pg = new IndexPage(driver);
+        Wb01_HomePage pg = new Wb01_HomePage(driver);
         pg.ClickOnSignup();
 
-        MyAccount My = new MyAccount(driver);
+        Wb02_Signup_LoginPage My = new Wb02_Signup_LoginPage(driver);
         My.EnterName("Viru");
         My.EnterEmailID("viru34@yopmail.com");
         My.SignupButton();
-        logger.info("Signup successfully");
+        log.info("Signup successfully");
 
-        AccountCreationDetails ACCD = new AccountCreationDetails(driver);
+        Wb03_AccountCreationPage ACCD = new Wb03_AccountCreationPage(driver);
         ACCD.SelectTitleMr();
         ACCD.EnterPassword("123456");
         ACCD.EnterAddFName("Viru");
@@ -39,38 +39,38 @@ public class TC_MyAccountPageTestDataDrivenTesting extends BaseClass {
         ACCD.EnterMobileNumber("9876432123");
         ACCD.ClickOnRegistration();
 
-        logger.info("Registration successfully");
+        log.info("Registration successfully");
 
     }
 
     @Test(dataProvider = "LoginDataProvider")
     public void VerifyLogin(String userEml, String passWrd, String ExpUserName) throws IOException {
 
-        IndexPage pg = new IndexPage(driver);
+        Wb01_HomePage pg = new Wb01_HomePage(driver);
         pg.ClickOnSignup();
-        logger.info("Successfully click on the sing up link");
+        log.info("Successfully click on the sing up link");
 
-        MyAccount My = new MyAccount(driver);
+        Wb02_Signup_LoginPage My = new Wb02_Signup_LoginPage(driver);
         My.EnterLoginEmail(userEml);
-        logger.info("Enter Email successfully");
+        log.info("Enter Email successfully");
         My.EnterLoginPassword(passWrd);
-        logger.info("Enter Password successfully");
+        log.info("Enter Password successfully");
         My.ClickOnLoginButton();
-        logger.info("Button clicked successfully");
-        logger.info("Log in Successfully");
+        log.info("Button clicked successfully");
+        log.info("Log in Successfully");
 
-        RegisterUserAccount_HomePage rgUser = new RegisterUserAccount_HomePage(driver);
+        Wb04_RegisterUserAccount_HomePage rgUser = new Wb04_RegisterUserAccount_HomePage(driver);
         String LoginUser = rgUser.verifyname();
 
         if (LoginUser.equals(ExpUserName)) {
-            logger.info("User name is correct");
+            log.info("User name is correct");
             Assert.assertTrue(true);
-//            System.out.println("Log file path: " + System.getProperty("user.dir") + "/logs/mylog.log");
+//            System.out.println("Log file path: "+ System.getProperty("user.dir") + "/logs/mylog.log");
 //            logger.debug("This is a debug message");
 //            logger.info("This is an info message");
             rgUser.logout();
         } else {
-            logger.info("User name is Incorrect");
+            log.info("User name is Incorrect");
             CaptureScreenShot(driver, "VerifyLogin");
             Assert.assertTrue(false);
         }
@@ -81,7 +81,7 @@ public class TC_MyAccountPageTestDataDrivenTesting extends BaseClass {
     @DataProvider(name = "LoginDataProvider")
     public String [][] LoginDataProvider() {
 
-        System.out.println(System.getProperty("user.dir"));
+//        System.out.println(System.getProperty("user.dir"));
         String fileName = System.getProperty("user.dir") + "\\TestData\\Test Data.xlsx";
 
         // Using Apache POI's DataFormatter to read different types of data
@@ -99,7 +99,7 @@ public class TC_MyAccountPageTestDataDrivenTesting extends BaseClass {
                 data[i -1][j] = ReadExcelFile.getCellValue(fileName, "Sheet1", i,j, dataFormatter );
                 System.out.println( data[i -1][j]);
             }
-        } logger.info("Data is successfully fetch from Excel file");
+        } log.info("Data is successfully fetch from Excel file");
         return data;
 
     }

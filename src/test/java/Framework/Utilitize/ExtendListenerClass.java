@@ -57,7 +57,7 @@ public class ExtendListenerClass implements ITestListener {
         reports.flush();
     }
 
-    // When test case get failed, this method is called
+    // When a test case gets failed, this method is called
     public void onTestFailure(ITestResult Result) {
         System.out.println("Name of test method failed: " + Result.getName());
         test = reports.createTest(Result.getName());
@@ -70,19 +70,19 @@ public class ExtendListenerClass implements ITestListener {
         }
     }
 
-    // When test case get Skipped, this method is called
+    // When a test case get Skipped, this method is called
     public void onTestSkipped(ITestResult Result) {
         System.out.println("Name of test method Skipped: " + Result.getName());
         test = reports.createTest(Result.getName());
         test.log(Status.SKIP, MarkupHelper.createLabel("Name of the Skip test case: " + Result.getName(), ExtentColor.ORANGE));
     }
 
-    // When test case get Started, this method is called
+    // When a test case get Started, this method is called
     public void onTestStart(ITestResult Result) {
         System.out.println("Name of test method Started: " + Result.getName());
     }
 
-    // When test case get passed, this method is called
+    // When a test case gets passed, this method is called
     public void onTestSuccess(ITestResult Result) {
         System.out.println("Name of test Successfully  Executed : " + Result.getName());
         test = reports.createTest(Result.getName());

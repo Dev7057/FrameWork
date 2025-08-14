@@ -6,13 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.security.Key;
-
-public class ViewProductPage {
+public class Wb06_ViewProductPage {
 
     WebDriver ldriver;
 
-    public ViewProductPage(WebDriver rdriver){
+    public Wb06_ViewProductPage(WebDriver rdriver){
         ldriver= rdriver;
 
         PageFactory.initElements(rdriver, this);

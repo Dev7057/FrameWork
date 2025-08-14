@@ -5,11 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterUserAccount_HomePage {
+public class Wb04_RegisterUserAccount_HomePage {
 
     WebDriver ldriver;
 
-   public RegisterUserAccount_HomePage(WebDriver rdriver){
+   public Wb04_RegisterUserAccount_HomePage(WebDriver rdriver){
         ldriver= rdriver;
 
         PageFactory.initElements(rdriver, this);
